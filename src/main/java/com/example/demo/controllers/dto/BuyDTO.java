@@ -18,7 +18,7 @@ public class BuyDTO {
 
     private Long id;
     private LocalDateTime date;
-    private User user;
-    private Product product;
+    private UserDTO user;
+    private ProductDTO product;
     
 }

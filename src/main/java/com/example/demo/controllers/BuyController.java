@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.Mapper.MapperConvert;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,9 @@ import com.example.demo.exceptions.UserNotFoundException;
 @RequestMapping("/api/buy")
 
 public class BuyController {
+
+    @Autowired
+    private MapperConvert mapperConvert;
 
     @Autowired
     private IUserRepositories iUserRepositories;
@@ -63,8 +68,8 @@ public class BuyController {
                 BuyDTO buyDTO = BuyDTO.builder()
                         .id(buy.getId())
                         .date(buy.getDate())
-                        .user(buy.getUser())
-                        .product(buy.getProduct())
+                        .user(mapperConvert.convertUserToDTO(buy.getUser()))
+                        .product(mapperConvert.convertProductToDTO(buy.getProduct()))
                         .build();
 
                 return ResponseEntity.ok(buyDTO);
@@ -95,8 +100,8 @@ public class BuyController {
             BuyDTO buyDTO = new BuyDTO();
             buyDTO.setId(buy.getId());
             buyDTO.setDate(buy.getDate());
-            buyDTO.setUser(buy.getUser());
-            buyDTO.setProduct(buy.getProduct());
+            buyDTO.setUser(mapperConvert.convertUserToDTO(buy.getUser()));
+            buyDTO.setProduct(mapperConvert.convertProductToDTO(buy.getProduct()));
             buylist.add(buyDTO);
         }
 
@@ -112,20 +117,20 @@ public class BuyController {
         String email = sessionTokenService.getUserEmailFromToken(token);
         User user = iUserRepositories.findByEmail(email);
 
-        LocalDateTime now = LocalDateTime.now();
+
         Buy buyCreated = buyService.save(Buy.builder()
                 .id(buyDTO.getId())
-                .date(now)
+                .date(LocalDateTime.now())
                 .user(user)
-                .product(buyDTO.getProduct())
+                .product(mapperConvert.convertProductDTOToProduct(buyDTO.getProduct()))
                 .build());
 
 
                 BuyDTO responseDTO = BuyDTO.builder()
                 .id(buyCreated.getId())
                 .date(buyCreated.getDate())
-                .user(buyCreated.getUser())
-                .product(buyCreated.getProduct())
+                .user(mapperConvert.convertUserToDTO(buyCreated.getUser()))
+                .product(mapperConvert.convertProductToDTO(buyCreated.getProduct()))
                 .build();        
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);

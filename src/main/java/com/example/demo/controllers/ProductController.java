@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.example.demo.Mapper.MapperConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -47,6 +48,7 @@ public class ProductController {
     @Value ("${images.storage.path}")
     private String storageFolderPath;
 
+
     @Autowired
     private IUserRepositories iUserRepositories;
 
@@ -64,7 +66,7 @@ public class ProductController {
 
             if(productOptional.isPresent()){
                 Product product = productOptional.get();
-    
+
                 ProductDTO productDTO = ProductDTO.builder()
                     .id(product.getId())
                     .name(product.getName())
