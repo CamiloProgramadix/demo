@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.Mapper.MapperConvert;
-import org.apache.catalina.mapper.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,10 @@ import com.example.demo.Repositories.IUserRepositories;
 import com.example.demo.Services.impl.BuyServicesImpl;
 import com.example.demo.Services.impl.SessionTokenService;
 import com.example.demo.controllers.dto.BuyDTO;
+import com.example.demo.controllers.dto.ProductDTO;
+import com.example.demo.controllers.dto.UserDTO;
 import com.example.demo.entities.Buy;
+import com.example.demo.entities.Product;
 import com.example.demo.entities.User;
 import com.example.demo.exceptions.InvalidSessionTokenException;
 import com.example.demo.exceptions.UnauthorizedAccessException;
@@ -35,7 +37,7 @@ import com.example.demo.exceptions.UserNotFoundException;
 public class BuyController {
 
     @Autowired
-    private MapperConvert mapperConvert;
+    private ModelMapper modelMapper;
 
     @Autowired
     private IUserRepositories iUserRepositories;
@@ -68,8 +70,8 @@ public class BuyController {
                 BuyDTO buyDTO = BuyDTO.builder()
                         .id(buy.getId())
                         .date(buy.getDate())
-                        .user(mapperConvert.convertUserToDTO(buy.getUser()))
-                        .product(mapperConvert.convertProductToDTO(buy.getProduct()))
+                        .user(modelMapper.map(buy.getUser(), UserDTO.class ))
+                        .product(modelMapper.map(buy.getProduct(), ProductDTO.class))
                         .build();
 
                 return ResponseEntity.ok(buyDTO);
@@ -100,8 +102,8 @@ public class BuyController {
             BuyDTO buyDTO = new BuyDTO();
             buyDTO.setId(buy.getId());
             buyDTO.setDate(buy.getDate());
-            buyDTO.setUser(mapperConvert.convertUserToDTO(buy.getUser()));
-            buyDTO.setProduct(mapperConvert.convertProductToDTO(buy.getProduct()));
+            buyDTO.setUser(modelMapper.map(buy.getUser(), UserDTO.class));
+            buyDTO.setProduct(modelMapper.map(buy.getProduct(), ProductDTO.class));
             buylist.add(buyDTO);
         }
 
@@ -117,21 +119,19 @@ public class BuyController {
         String email = sessionTokenService.getUserEmailFromToken(token);
         User user = iUserRepositories.findByEmail(email);
 
-
         Buy buyCreated = buyService.save(Buy.builder()
                 .id(buyDTO.getId())
                 .date(LocalDateTime.now())
                 .user(user)
-                .product(mapperConvert.convertProductDTOToProduct(buyDTO.getProduct()))
+                .product(modelMapper.map(buyDTO.getProduct(), Product.class))
                 .build());
 
-
-                BuyDTO responseDTO = BuyDTO.builder()
+        BuyDTO responseDTO = BuyDTO.builder()
                 .id(buyCreated.getId())
                 .date(buyCreated.getDate())
-                .user(mapperConvert.convertUserToDTO(buyCreated.getUser()))
-                .product(mapperConvert.convertProductToDTO(buyCreated.getProduct()))
-                .build();        
+                .user(modelMapper.map(buyCreated.getUser(), UserDTO.class))
+                .product(modelMapper.map(buyCreated.getProduct(), ProductDTO.class))
+                .build();   
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }

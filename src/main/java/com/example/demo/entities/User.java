@@ -45,10 +45,7 @@ public class User {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})}
     )
     @Column(nullable = false)
-    private List<Role> roles;   
-    
-    
-    
+    private List<Role> roles;
     
     
 }
