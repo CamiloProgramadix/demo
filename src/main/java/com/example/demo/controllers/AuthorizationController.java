@@ -29,7 +29,7 @@ import com.example.demo.exceptions.InvalidSessionTokenException;
 @RestController
 @RequestMapping("/api/auth")
 
-public class AuthorizationController {
+    public class AuthorizationController {
 
     @Autowired
     private IUserService usuarioService;
