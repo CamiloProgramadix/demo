@@ -98,7 +98,8 @@ public class ProductController {
         productDTO.setId(product.getId());
         productDTO.setName(product.getName());
         productDTO.setPrice(product.getPrice());
-        productDTO.setCategory(productDTO.getCategory());
+        productDTO.setCategory(product.getCategory());
+        productDTO.setImages(product.getImages());
         productlist.add(productDTO);
         }
 

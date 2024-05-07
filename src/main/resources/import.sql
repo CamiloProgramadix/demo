@@ -3,7 +3,7 @@ INSERT INTO users (name, last_name, email, password) VALUE ('Camilo','Cabrales',
 INSERT INTO users (name, last_name, email, password) VALUES ('Ezequiel', 'Palencia','palenciaezequiel09@gmail.com','5678'); 
 INSERT INTO users (name, last_name, email, password ) VALUES ('Jesus', 'Deulufeutt', 'jesusdeulufeuttmendez@gmail.com','0987'); 
 
-INSERT INTO product(name, price, category) VALUES('Estufa De Empotrar 4 Puestos', 600000,  'Domestico');
+INSERT INTO product(name, price, category, images) VALUES('Estufa De Empotrar 4 Puestos', 600000,  'Domestico', 'http://localhost:8080/images/imagen.png');
 INSERT INTO product(name, price, category) VALUES ('Estufa De Piso 30"', 1200000, 'Industrial'); 
 INSERT INTO product (name, price, category) VALUES ('Estufa De Empotrar Vidrio Templado Roja 6545 Gas Natural ', 2000000, 'Industrial');
 
