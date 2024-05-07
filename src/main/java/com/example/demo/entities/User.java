@@ -29,7 +29,7 @@ public class User {
     private String name;
 
     @Column
-    private String lastName;
+    private String last_name;
 
     @Column
     private String email;

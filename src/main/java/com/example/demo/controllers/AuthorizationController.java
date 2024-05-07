@@ -57,7 +57,7 @@ public class AuthorizationController {
 
     User userRegister = usuarioService.save(User.builder()
         .name(userDTO.getName())
-        .lastName(userDTO.getLast_name()) 
+        .last_name(userDTO.getLast_name()) 
         .email(userDTO.getEmail())
         .password(userDTO.getPassword())
         .roles(userDTO.getRoles())

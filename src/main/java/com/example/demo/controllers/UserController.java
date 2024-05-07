@@ -67,7 +67,7 @@ public class UserController {
                 UserDTO usuarioDTO = UserDTO.builder()
                         .id(usuario.getId())
                         .name(usuario.getName())
-                        .last_name(usuario.getLastName())
+                        .last_name(usuario.getLast_name())
                         .email(usuario.getEmail())
                         .password(usuario.getPassword())
                         .build();
@@ -105,7 +105,7 @@ public class UserController {
             UserDTO usuarioDTO = new UserDTO();
             usuarioDTO.setId(usuario.getId());
             usuarioDTO.setName(usuario.getName());
-            usuarioDTO.setLast_name(usuario.getLastName());
+            usuarioDTO.setLast_name(usuario.getLast_name());
             usuarioDTO.setEmail(usuario.getEmail());
             usuarioDTO.setPassword(usuario.getPassword());
             usuariolist.add(usuarioDTO);
@@ -128,7 +128,7 @@ public class UserController {
         userDTO.setRoles(roles);
         User user = usuarioService.save(User.builder()
                 .name(userDTO.getName())
-                .lastName(userDTO.getLast_name())
+                .last_name(userDTO.getLast_name())
                 .email(userDTO.getEmail())
                 .password(userDTO.getPassword())
                 .roles(userDTO.getRoles())
@@ -151,7 +151,7 @@ public class UserController {
                 if (usuarioOptional.isPresent()) {
                     User user = usuarioOptional.get();
                     user.setName(userDTO.getName());
-                    user.setLastName(userDTO.getLast_name());
+                    user.setLast_name(userDTO.getLast_name());
                     user.setEmail(userDTO.getEmail());
                     user.setPassword(userDTO.getPassword());
                     usuarioService.save(user);
