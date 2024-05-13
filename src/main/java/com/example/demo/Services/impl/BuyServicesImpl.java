@@ -38,6 +38,11 @@ public class BuyServicesImpl implements IBuyService {
         buyDAO.deleteById(id);
     }
 
+    @Override
+    public List<Buy> saveAllBuys(List<Buy> buys) {
+        return buyDAO.saveAllBuys(buys);
+    }
+
     
     
 

@@ -32,8 +32,6 @@ public class Product {
     @Column (name = "images")
     private String images;
 
-
-
     
 
     

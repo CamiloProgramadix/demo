@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,12 +35,8 @@ public class Buy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_product", nullable = false)
-    @JsonIgnore
-    private Product product;
     
+    @Column(nullable = false)
     private LocalDateTime date;
 
     @ManyToOne
@@ -47,6 +44,14 @@ public class Buy {
     @JsonIgnore
     @OnDelete (action = OnDeleteAction.SET_NULL)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_product", nullable = false)
+    @JsonIgnore
+    @OnDelete (action = OnDeleteAction.SET_NULL)
+    private Product product;
+
+    private int quantity;
 
     
 

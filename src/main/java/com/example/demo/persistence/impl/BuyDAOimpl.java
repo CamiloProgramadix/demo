@@ -21,6 +21,8 @@ public class BuyDAOimpl implements BuyDAO {
        return (List<Buy>) buyRepositories.findAll();
     }
 
+
+
     @Override
     public Optional<Buy> findById(Long id) {
        return buyRepositories.findById(id);
@@ -35,6 +37,14 @@ public class BuyDAOimpl implements BuyDAO {
     @Override
     public void deleteById(Long id) {
         buyRepositories.deleteById(id);
+       
+    }
+
+
+
+    @Override
+    public List<Buy> saveAllBuys(List<Buy> buys) {
+        return (List<Buy>) buyRepositories.saveAll(buys);
        
     }
 

@@ -72,6 +72,7 @@ public class BuyController {
                         .date(buy.getDate())
                         .user(modelMapper.map(buy.getUser(), UserDTO.class ))
                         .product(modelMapper.map(buy.getProduct(), ProductDTO.class))
+                        .quantity(buy.getQuantity())
                         .build();
 
                 return ResponseEntity.ok(buyDTO);
@@ -104,6 +105,7 @@ public class BuyController {
             buyDTO.setDate(buy.getDate());
             buyDTO.setUser(modelMapper.map(buy.getUser(), UserDTO.class));
             buyDTO.setProduct(modelMapper.map(buy.getProduct(), ProductDTO.class));
+            buyDTO.setQuantity(buy.getQuantity());
             buylist.add(buyDTO);
         }
 
@@ -111,7 +113,7 @@ public class BuyController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody BuyDTO buyDTO, @RequestHeader("Authorization") String token)
+    public ResponseEntity<?> save(@RequestBody List<BuyDTO> buyDTO, @RequestHeader("Authorization") String token)
             throws URISyntaxException {
         if (!sessionTokenService.isValidSessionToken(token)) {
             throw new InvalidSessionTokenException("Token invalido");
@@ -119,20 +121,28 @@ public class BuyController {
         String email = sessionTokenService.getUserEmailFromToken(token);
         User user = iUserRepositories.findByEmail(email);
 
-        Buy buyCreated = buyService.save(Buy.builder()
-                .id(buyDTO.getId())
-                .date(LocalDateTime.now())
-                .user(user)
-                .product(modelMapper.map(buyDTO.getProduct(), Product.class))
-                .build());
+        List<BuyDTO> responseDTO = new ArrayList<>();
+        List<Buy> buys = new ArrayList<>();
 
-        BuyDTO responseDTO = BuyDTO.builder()
+        for(BuyDTO buy: buyDTO){
+            Buy buyCreated = Buy.builder()
+                .id(buy.getId())
+                .date(LocalDateTime.now()) 
+                .user(user)
+                .product(modelMapper.map(buy.getProduct(), Product.class))
+                .quantity(buy.getQuantity())
+                .build();
+            buys.add(buyCreated);
+            
+            responseDTO.add(BuyDTO.builder()
                 .id(buyCreated.getId())
                 .date(buyCreated.getDate())
                 .user(modelMapper.map(buyCreated.getUser(), UserDTO.class))
                 .product(modelMapper.map(buyCreated.getProduct(), ProductDTO.class))
-                .build();   
-
+                .quantity(buyCreated.getQuantity())
+                .build());       
+        }
+            buyService.saveAllBuys(buys);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 }

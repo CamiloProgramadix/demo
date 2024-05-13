@@ -70,11 +70,13 @@ import com.example.demo.exceptions.InvalidSessionTokenException;
     public ResponseEntity <?> login (@RequestBody Login login){
         
         User user = userRepositories.findByEmail(login.getEmail());
-
+        Map <String, String> response = new HashMap<>();
         if(user!=null&& user.getPassword().equals(login.getPassword())){
             String token = sessionTokenService.generateSessionToken(login.getEmail());
-            return ResponseEntity.status(HttpStatus.OK).body(token);
+            response.put("message", token);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
+        
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
     }
 
@@ -89,4 +91,6 @@ import com.example.demo.exceptions.InvalidSessionTokenException;
         return ResponseEntity.ok(response);
 
     }
+
+    
 }
