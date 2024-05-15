@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -33,24 +34,25 @@ public class Buy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = false)
     @JsonIgnore
-    @OnDelete (action = OnDeleteAction.SET_NULL)
+    @OnDelete (action = OnDeleteAction.CASCADE)
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "id_product", nullable = false)
     @JsonIgnore
-    @OnDelete (action = OnDeleteAction.SET_NULL)
+    @OnDelete (action = OnDeleteAction.CASCADE)
     private Product product;
 
+    @Column(nullable = false)
     private int quantity;
 
     

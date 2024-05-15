@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Product")
+@Table(name = "Products")
 
 public class Product {
     
@@ -20,16 +20,16 @@ public class Product {
 
     private Long id;
 
-    @Column (name = "name")
+    @Column (name = "name", nullable = false)
     private String name;
 
-    @Column (name = "price")
+    @Column (name = "price", nullable = false)
     private BigDecimal price;
 
-    @Column (name = "category")
+    @Column (name = "category", nullable = false)
     private String category;
 
-    @Column (name = "images")
+    @Column (name = "images", nullable = false)
     private String images;
 
     
