@@ -1,7 +1,7 @@
 
-INSERT INTO users (name, last_name, email, password) VALUE ('Camilo','Cabrales', 'camilocabrales2005@gmail.com','1234');
-INSERT INTO users (name, last_name, email, password) VALUES ('Ezequiel', 'Palencia','palenciaezequiel09@gmail.com','5678'); 
-INSERT INTO users (name, last_name, email, password ) VALUES ('Jesus', 'Deulufeutt', 'jesusdeulufeuttmendez@gmail.com','0987'); 
+INSERT INTO users (name, last_name, email, password) VALUE ('Camilo','Cabrales', 'camilocabrales2005@gmail.com','camilo12345');
+INSERT INTO users (name, last_name, email, password) VALUES ('Ezequiel', 'Palencia','palenciaezequiel09@gmail.com','ezequiel12345'); 
+INSERT INTO users (name, last_name, email, password ) VALUES ('Jesus', 'Deulufeutt', 'jesusdeulufeuttmendez@gmail.com','jesus12345'); 
 
 INSERT INTO product(name, price, category, images) VALUES('Estufa De Empotrar 4 Puestos', 600000,  'Domestico', 'http://localhost:8080/images/imagen.png');
 INSERT INTO product(name, price, category, images) VALUES ('Estufa De Piso 30"', 1200000, 'Industrial', 'http://localhost:8080/images/imagen.png'); 
