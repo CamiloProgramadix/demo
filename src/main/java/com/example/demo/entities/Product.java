@@ -1,6 +1,5 @@
 package com.example.demo.entities;
 
-import java.math.BigDecimal;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +23,7 @@ public class Product {
     private String name;
 
     @Column (name = "price", nullable = false)
-    private BigDecimal price;
+    private int price;
 
     @Column (name = "category", nullable = false)
     private String category;
