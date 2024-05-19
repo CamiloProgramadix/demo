@@ -4,7 +4,7 @@ INSERT INTO users (name, last_name, email, password) VALUES ('Ezequiel', 'Palenc
 INSERT INTO users (name, last_name, email, password ) VALUES ('Jesus', 'Deulufeutt', 'jesusdeulufeuttmendez@gmail.com','jesus12345'); 
 
 INSERT INTO product(name, price, category, images) VALUES('Plancha Asadora', 1000000,  'Industrial', 'http://localhost:8080/images/i1.png');
-INSERT INTO product(name, price, category, images) VALUES ('Meson de Lavaplatos"', 300000, 'Industrial', 'http://localhost:8080/images/i2.png'); 
+INSERT INTO product(name, price, category, images) VALUES ('Meson de Lavaplatos', 300000, 'Industrial', 'http://localhost:8080/images/i2.png'); 
 INSERT INTO product (name, price, category, images) VALUES ('Meson de Trabajo pesado', 550000, 'Industrial', 'http://localhost:8080/images/i3.png');
 INSERT INTO product(name, price, category, images) VALUES('Freidora Industrial', 1200000,  'Industrial', 'http://localhost:8080/images/i4.png');
 INSERT INTO product(name, price, category, images) VALUES ('Freidora Doble', 2400000, 'Industrial', 'http://localhost:8080/images/i5.png'); 

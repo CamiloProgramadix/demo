@@ -170,6 +170,17 @@ public class UserController {
 
     }
 
+    @GetMapping("/findByEmail")
+    public ResponseEntity<User> getUserByToken (@RequestHeader ("Authorization") String token){
+        if (!sessionTokenService.isValidSessionToken(token)){
+            throw new InvalidSessionTokenException("Token invalido");
+        }
+        String email = sessionTokenService.getUserEmailFromToken(token);
+        User user = iUserRepositories.findByEmail(email);
+
+        return ResponseEntity.ok(user);
+    }
+       
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id, @RequestHeader("Authorization") String token) {
         if (sessionTokenService.isValidSessionToken(token)) {
