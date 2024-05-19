@@ -73,6 +73,7 @@ public class ProductController {
                     .name(product.getName())
                     .price(product.getPrice())
                     .category(product.getCategory())
+                    .images(product.getImages())
                     .build();
     
                 return ResponseEntity.ok(productDTO);
