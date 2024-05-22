@@ -155,7 +155,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productcreated);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateUsuario(@PathVariable Long id, @RequestBody ProductDTO productDTO, @RequestParam ("image") MultipartFile image, @RequestHeader ("Authorization") String token) throws IOException { 
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO, @RequestParam ("image") MultipartFile image, @RequestHeader ("Authorization") String token) throws IOException { 
         if(!sessionTokenService.isValidSessionToken(token)){
             throw new InvalidSessionTokenException("Token invalido");
         }   
