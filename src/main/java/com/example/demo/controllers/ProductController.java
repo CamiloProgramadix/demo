@@ -155,7 +155,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productcreated);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO, @RequestParam ("image") MultipartFile image, @RequestHeader ("Authorization") String token) throws IOException { 
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, ProductDTO productDTO, @RequestParam ("image") MultipartFile image, @RequestHeader ("Authorization") String token) throws IOException { 
         if(!sessionTokenService.isValidSessionToken(token)){
             throw new InvalidSessionTokenException("Token invalido");
         }   
@@ -197,7 +197,7 @@ public class ProductController {
             product.setCategory(productDTO.getCategory());
             product.setImages(serverImagePath);
             productService.save(product);
-            return ResponseEntity.ok("Registro Actualizado");
+            return ResponseEntity.ok(product);
 
         }
 
